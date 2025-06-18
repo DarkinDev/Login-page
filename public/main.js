@@ -1,12 +1,12 @@
 // Handle login form submission
 document.getElementById("loginForm")?.addEventListener("submit", function (e) {
   e.preventDefault(); // Prevent form submission
-
+  console.log(true);
   const username = document.getElementById("username").value;
   const password = document.getElementById("password").value;
 
   // Send login request to server
-  fetch("/login", {
+  fetch("http://localhost:5000/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -33,7 +33,7 @@ document.getElementById("signupForm")?.addEventListener("submit", function (e) {
   const password = document.getElementById("password").value;
 
   // Send signup request to server
-  fetch("/signup", {
+  fetch("http://localhost:5000/signup", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
