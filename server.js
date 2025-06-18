@@ -39,7 +39,7 @@ app.post("/signup", async (req, res) => {
   // Check if the username already exists
   const existingUser = await User.findOne({ username });
   if (existingUser) {
-    return res.status(400).json({ message: "Username already exists" });
+    return res.status(401).json({ message: "Username already exists" });
   }
 
   // Hash the password
@@ -67,13 +67,17 @@ app.post("/login", async (req, res) => {
   // Find user by username
   const user = await User.findOne({ username });
   if (!user) {
-    return res.status(400).json({ message: "Invalid credentials" });
+    return res
+      .status(401)
+      .json({ message: "Your username or password is incorrect" });
   }
 
   // Compare passwords
   const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) {
-    return res.status(400).json({ message: "Invalid credentials" });
+    return res
+      .status(401)
+      .json({ message: "Your username or password is incorrect" });
   }
 
   res.status(200).json({ message: "Login successful" });
